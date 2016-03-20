@@ -40,11 +40,14 @@ include ("bloks/bd.php");
 
 $result = mysql_query("SELECT title,id FROM articles");       
 $myrow = mysql_fetch_array($result);
-
-do {
-printf ("<p><input name='id' type='radio' value='%s'><label>%s</label> </p>",$myrow["id"],$myrow["title"]);
-
+$i=0;  	   
+	 do 
+{
+$arr[$i]=$myrow["id"];
+printf ("<p><input name='arr$i' type='checkbox' value='%s'><label> %s</lebel></p>",$arr[$i],$myrow["title"]);
+$i++;
 }
+
 while ($myrow = mysql_fetch_array($result));
 
 

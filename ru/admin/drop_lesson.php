@@ -8,7 +8,8 @@
 ***************************************************************/
 include ("lock.php");
 include ("bloks/bd.php");
-if (isset($_POST['id']))     {$id=$_POST['id']; }
+if(isset($_GET)) {$id=array_values($_GET); }
+$N=count($id);
 
 ?>
 
@@ -36,18 +37,23 @@ if (isset($_POST['id']))     {$id=$_POST['id']; }
                 
                  <p>
                    <?php 
-if (isset($id))
-{
-
-$result = mysql_query ("DELETE FROM lessons WHERE id='$id'");
-
-if ($result == 'true') { echo "<p>Ваш урок успешно удален!</p>";}
-else {echo "<p>Ваш урок не удален</p>";}
-	} 
-else 
-{
-echo "<p>Не найден параметр</p>";
-}				 
+$i=0;
+	   $prob=0;
+     if(isset($id)&&($N>1))
+	 {
+	  while($i<($N-1))
+	  {
+	 $result= mysql_query("DELETE FROM lessons WHERE id='$id[$i]'");
+	 if ($result=='true') {$prob++;}
+	 $i++;
+	 }
+	 if($prob==$N-1) {echo "<p>Урок успешно удален</p>";} else {echo "<p>Урок не удален</p>";}
+	 }
+	 else
+	 {
+	 echo "<p>Переменная id не существует</p>";
+	 
+	 } 
 				 
 
 				 ?>
