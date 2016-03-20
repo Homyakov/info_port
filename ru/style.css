@@ -54,6 +54,8 @@ p
 font :12px Verdana;
 margin:15px;
 }
+h1{margin:15px;
+}
 .left {
 background-color:#f6f6f6;
 border-right:1px solid #424242;
